@@ -109,11 +109,15 @@ public class Menu {
             String newName = JOptionPane.showInputDialog("Ingrese el nuevo nombre del producto:");
             if (newName == null) { // Se ha seleccionado Cancelar
                 return;
+            } else if (newName.trim().isEmpty()) { // No se ha ingresado un nuevo nombre
+                newName = modifyProduct.getName();
             }
 
             String newDescription = JOptionPane.showInputDialog("Ingrese la nueva descripción del producto:");
             if (newDescription == null) { // Se ha seleccionado Cancelar
                 return;
+            } else if (newDescription.trim().isEmpty()) { // No se ha ingresado una nueva descripción
+                newDescription = modifyProduct.getDescription();
             }
 
             double newPrice = modifyProduct.getPrice();
@@ -173,6 +177,10 @@ public class Menu {
 
     private void searchProduct() {
         String searchCode = JOptionPane.showInputDialog("Ingrese el código del producto a buscar:");
+        if (searchCode == null) { // Se ha seleccionado Cancelar
+            return;
+        }
+
         Product searchProduct = inventory.findProduct(searchCode);
         if (searchProduct != null) {
             JOptionPane.showMessageDialog(null, "Producto encontrado:\n" +
